@@ -1,0 +1,28 @@
+version: "3.9"  # optional since v1.27.0
+services:
+  sql:
+    image: "mcr.microsoft.com/mssql/server:latest"
+    container_name: sql_server2022
+    ports: # not actually needed, because the two services are on the same network.
+      - "1402:1433" 
+    healthcheck:
+      test: "exit 0"
+    environment:
+      - ACCEPT_EULA=y
+      - SA_PASSWORD=Forh@d123
+  
+  web_api:
+    build: . # build the Docker image 
+    depends_on:
+      sql:
+        condition: service_healthy
+    environment:
+        DatabaseServer: "172.16.7.19"
+        DatabasePort: "1402"
+        DatabaseUser: "SA"
+        DatabasePassword: "Forh@d123"
+        DatabaseName: "ProjectManagement"
+    
+    ports:
+      - "8092:80"
+  
