@@ -6,5 +6,7 @@ Prerequisites
 Docker, SQL Server
 # Getting Started
 git clone https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPO_NAME.git
-# Run the API and in docker containers
+# Run the API in docker containers
 docker-compose up
+# Run from.Net CLI
+dotnet run
