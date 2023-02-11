@@ -1,12 +1,29 @@
-# project-management
+## project-management
 Project Management Tool
-# Prerequisites
-Prerequisites
-.NET Core SDK, 
-Docker, SQL Server
-# Getting Started
-git clone https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPO_NAME.git
-# Run the API in docker containers
-docker-compose up
-# Run from.Net CLI
+## Prerequisites
+- .NET Core SDK
+- SQL Server
+- Docker
+## Getting Started
+<b>1. Clone this repository: </b> <br>
+git clone https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPO_NAME.git 
+
+<br><b>2. Navigate to the project directory:  </b><br>
+cd project-management-api
+## Build from.Net CLI
+dotnet build
+## Run from.Net CLI
 dotnet run
+## Run the API in docker containers
+docker-compose up
+## Features
+- Dockerizing 
+- JWT Authentication
+- Swagger Documentation
+- Add/Update User
+- Add/Update Project
+- Add/Update Task
+- Role based Authorization
+
+
+
