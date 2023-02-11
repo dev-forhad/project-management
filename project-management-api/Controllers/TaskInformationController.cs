@@ -12,61 +12,64 @@ namespace project_management_api.Controllers
     [ApiController]
     public class TaskInformationController : ControllerBase
     {
-        //private readonly ITaskInformationRepository _taskInformationRepository;
+        private readonly ITaskInformationRepository _taskInformationRepository;
 
-        //public TaskInformationController(ITaskInformationRepository taskInformationRepository)
-        //{
-        //    _taskInformationRepository = taskInformationRepository;
-        //}
+        public TaskInformationController(ITaskInformationRepository taskInformationRepository)
+        {
+            _taskInformationRepository = taskInformationRepository;
+        }
 
-        //[HttpPost]
-        //public async Task<IActionResult> CreateTask(int projectId, [FromBody] TaskInformationDto taskInformation)
-        //{
-        //    var task = new TaskInformation
-        //    {
-        //        Id = projectId,
-        //        Name = taskInformation.Name,
-        //        StartDate = taskInformation.StartDate,
-        //        EndDate = taskInformation.EndDate,
-        //        Difficulty = taskInformation.Difficulty,
-        //        Status = taskInformation.Status
-        //    };
+        [HttpPost]
+        [Route("CreateTask")]
+        public async Task<IActionResult> CreateTask(int projectId, [FromBody] TaskInformationDto taskInformation)
+        {
+            var task = new TaskInformation
+            {
+                Id = projectId,
+                Name = taskInformation.Name,
+                StartDate = taskInformation.StartDate,
+                EndDate = taskInformation.EndDate,
+                Difficulty = taskInformation.Difficulty,
+                Status = taskInformation.Status
+            };
 
-        //    await _taskInformationRepository.CreateTask(task);
+            await _taskInformationRepository.CreateTask(task);
 
-        //    return CreatedAtAction(nameof(GetTaskById), new { taskId = task.Id }, task);
-        //}
+            return CreatedAtAction(nameof(GetTaskById), new { taskId = task.Id }, task);
+        }
 
-        //[HttpPut("{taskId}")]
-        //public async Task<IActionResult> UpdateTask(int projectId, int taskId, [FromBody] TaskInformationDto taskInformation)
-        //{
-        //    var task = await _taskInformationRepository.GetTaskById(taskId);
-        //    if (task == null)
-        //    {
-        //        return NotFound();
-        //    }
+        [HttpPut]
+        [Route("UpdateTask")]
+        public async Task<IActionResult> UpdateTask(int projectId, int taskId, [FromBody] TaskInformationDto taskInformation)
+        {
+            var task = await _taskInformationRepository.GetTaskById(taskId);
+            if (task == null)
+            {
+                return NotFound();
+            }
 
-        //    task.Name = taskInformation.Name;
-        //    task.StartDate = taskInformation.StartDate;
-        //    task.EndDate = taskInformation.EndDate;
-        //    task.Difficulty = taskInformation.Difficulty;
-        //    task.Status = taskInformation.Status;
+            task.Name = taskInformation.Name;
+            task.StartDate = taskInformation.StartDate;
+            task.EndDate = taskInformation.EndDate;
+            task.Difficulty = taskInformation.Difficulty;
+            task.Status = taskInformation.Status;
 
-        //    await _taskInformationRepository.UpdateTask(task);
+            await _taskInformationRepository.UpdateTask(task);
 
-        //    return NoContent();
-        //}
+            return NoContent();
+        }
 
-        //[HttpGet("{taskId}")]
-        //public async Task<IActionResult> GetTaskById(int taskId)
-        //{
-        //    var task = await _taskInformationRepository.GetTaskById(taskId);
-        //    if (task == null)
-        //    {
-        //        return NotFound();
-        //    }
+        [HttpGet]
+        [Route("GetTaskById")]
+        public async Task<IActionResult> GetTaskById(int taskId)
+        {
+            var task = await _taskInformationRepository.GetTaskById(taskId);
+            if (task == null)
+            {
+                return NotFound();
+            }
 
-        //    return Ok(task);
-        //}
+            return Ok(task);
+        }
     }
 }

@@ -22,18 +22,20 @@ namespace project_management_api.Controllers
         }
 
         [HttpPost]
+        [Route("CreateProject")]
         public async Task<ActionResult<ProjectInformation>> CreateProject([FromBody] ProjectInformation project)
         {
             var adminId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
             var admin = await _userRepository.FindByName(adminId);
-            
+
 
             project.Admin = admin;
             var createdProject = await _projectRepository.CreateProject(project);
             return CreatedAtAction(nameof(GetProject), new { id = createdProject.Id }, createdProject);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut]
+        [Route("AssignDevelopers")]
         public async Task<ActionResult<ProjectInformation>> AssignDevelopers(int id, [FromBody] IEnumerable<string> developerIds)
         {
             var adminId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
@@ -57,7 +59,8 @@ namespace project_management_api.Controllers
             return Ok(updatedProject);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet]
+        [Route("GetProject")]
         public async Task<ActionResult<ProjectInformation>> GetProject(int id)
         {
             var project = await _projectRepository.GetProjectById(id);
