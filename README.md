@@ -6,7 +6,7 @@ Project Management Tool
 - Docker
 ## Getting Started
 <b>1. Clone this repository: </b> <br>
-git clone https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPO_NAME.git 
+git clone https://github.com/dev-forhad/project-management.git
 
 <br><b>2. Navigate to the project directory:  </b><br>
 cd project-management-api
